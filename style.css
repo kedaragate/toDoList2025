@@ -1,0 +1,148 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  transition: background-color var(--trasition-duration) ease-in;
+  font-family: "Poppins", serif;
+  font-weight: 300;
+  box-sizing: border-box;
+  /* color var(--trasition-duration) ease-in; */
+}
+:root {
+  --bg-body: rgb(0, 0, 0);
+  --bg-container: rgb(20, 20, 20);
+  --text-color: rgb(230, 230, 230);
+  --border-color: rgb(50, 50, 50);
+  --trasition-duration: 0.3s;
+  --blur-bg-color: rgb(0, 0, 0, 0.7);
+  --font-normal-weight: 300;
+  --font-bold-weight: 500;
+}
+[data-theme="light"] {
+  --bg-body: #ffffff;
+  --bg-container: #f0f0f0;
+  --text-color: #333333;
+  --border-color: #dddddd;
+  --blur-bg-color: rgb(255, 255, 255, 0.7);
+  --trasition-duration: 0.3s;
+  --font-normal-weight: 300;
+}
+body {
+  background-color: var(--bg-body);
+
+  color: var(--text-color);
+  width: 100vw;
+  height: 100vh;
+}
+main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
+}
+h1,
+h2,
+h3 {
+  font-weight: var(--font-bold-weight);
+}
+.container {
+  width: 50vw;
+  height: fit-content;
+  padding: 1rem;
+  border-radius: 1rem;
+  position: relative;
+
+  z-index: 1;
+}
+
+#main-heading {
+  text-align: center;
+  padding: 1rem;
+}
+.to-do-list {
+  margin-top: 2rem;
+}
+
+.to-do-list > li {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  padding: 1rem;
+  border-bottom: 0.5px solid var(--border-color);
+}
+
+#edit-form {
+  position: fixed;
+  background-color: var(--bg-container);
+  width: fit-content;
+  height: fit-content;
+  padding: 1rem;
+  border-radius: 1rem;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: space-between;
+  z-index: 3;
+  transition: var(--trasition-duration);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  backdrop-filter: blur(8px);
+  z-index: 2;
+  transition: var(--trasition-duration);
+}
+
+#to-do-item-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+  background-color: var(--bg-container);
+  max-width: 100%;
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+.form-items-container {
+  display: flex;
+  width: 100%;
+
+  justify-content: space-between;
+}
+
+.tasks-container {
+  background-color: var(--bg-container);
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+.to-do-list > li > span,
+h3 {
+  width: 25%;
+}
+button {
+  padding: 0.5rem;
+
+  border-radius: 0.5rem;
+
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  scale: 1.1;
+}

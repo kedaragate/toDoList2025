@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To Do List</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><button id="theme-toggle-element">toggle</button></li>
+      </ul>
+    </nav>
+    <main>
+      <div class="container">
+        <form id="to-do-item-form">
+          <h1 id="main-heading">Task Manager</h1>
+          <div class="form-items-container">
+            <div class="task-text-entry-div">
+              <label for="to-do-item">Enter Task</label>
+              <input
+                type="text"
+                name="to-do-item"
+                id="to-do-item"
+                placeholder="Enter Task"
+                required
+              />
+            </div>
+            <div class="task-date-entry-div">
+              <label for="due-date">Select Due Date</label>
+              <input
+                type="date"
+                name="due-date"
+                id="due-date"
+                placeholder="Select Task Due Date"
+                required
+              />
+            </div>
+            <button type="submit">Add Task</button>
+          </div>
+        </form>
+        <div class="tasks-container">
+          <!-- <div class="list-headings"> -->
+          <!-- <h3>Task</h3> -->
+          <!-- <h3>Due Date</h3> -->
+          <!-- <h3>Remaining Time</h3> -->
+          <!-- </div> -->
+          <ul class="to-do-list"></ul>
+        </div>
+      </div>
+    </main>
+
+    <script src="script.js" type="module"></script>
+  </body>
+</html>
