@@ -2,6 +2,7 @@ import createToDoElement from "./createToDoElement.js";
 import themeToggler from "./themeToggler.js";
 import editToDoEelement from "./editToDoElement.js";
 import deleteTask from "./deleteTask.js";
+import filterTask from "./filterTask.js";
 const dueDate = document.querySelector("#due-date");
 
 const today = new Date().toISOString().split("T")[0];
@@ -11,9 +12,11 @@ dueDate.min = today;
 themeToggler();
 editToDoEelement();
 deleteTask();
+filterTask();
 const toDoFormData = document.querySelector("#to-do-item-form");
 const toDoList = document.querySelector(".to-do-list");
 // const container = document.querySelector(".container");
+
 const toDoItemElement = document.querySelector("#to-do-item");
 
 const storedList = JSON.parse(localStorage.getItem("stored-list")) || [];
@@ -46,19 +49,14 @@ toDoFormData.addEventListener("submit", (e) => {
   const checkForDuplicate = arrayOfExistingItemsTexts.filter((item) => {
     return item === toDoItemElement.value.trim();
   });
-  console.log(checkForDuplicate);
+
   const isDuplicate = checkForDuplicate.length === 0 ? false : true;
 
   if (!isDuplicate) {
     const newToDoElement = createToDoElement(toDoData);
-    // const checkForDuplicate = storedList.filter((item) => {
-    //   return item.text === newToDoElement.text;
-    // });
-
-    // const dataArray = Array.from(toDoList.children);
-    // console.log(newToDoElement);
 
     storedList.push(newToDoElement);
+
     localStorage.setItem("stored-list", JSON.stringify(storedList));
   } else {
     alert(`Task "${toDoItemElement.value}" already exists`);
