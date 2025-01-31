@@ -7,6 +7,7 @@
   list-style: none;
   transition: background-color var(--trasition-duration) ease-in;
   /* transition: all var(--trasition-duration) ease-in; */
+
   font-family: "Poppins", serif;
   font-weight: 300;
   box-sizing: border-box;
@@ -94,10 +95,11 @@ h3 {
 #edit-form {
   position: fixed;
   background-color: var(--bg-container);
-  width: fit-content;
+  width: 50vw;
   height: fit-content;
   padding: 1rem;
   border-radius: 1rem;
+  border: 1px solid var(--border-color);
 
   top: 50%;
   left: 50%;
@@ -147,7 +149,7 @@ h3 {
 }
 
 .to-do-list > li > span,
-h3 {
+.task-list-headings-item {
   width: 25%;
 }
 button {
@@ -159,6 +161,7 @@ button {
   cursor: pointer;
   background-color: var(--primary-btn-bg-color);
   color: var(--primary-btn-text-color);
+  font-weight: 500;
 }
 
 button:hover {
@@ -172,6 +175,7 @@ input {
   padding: 0.5rem;
   border-radius: 0.5rem;
 }
+
 .search-task-div {
   width: 100%;
 
@@ -179,4 +183,20 @@ input {
   padding: 1rem;
   background-color: var(--bg-container);
   border-radius: 1rem;
+}
+
+.task-list-headings-item {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+  align-items: center;
+}
+.sort-icon-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  max-height: 50%;
+}
+.sort-task-icon {
+  height: 25%;
 }
