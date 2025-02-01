@@ -200,3 +200,7 @@ input {
 .sort-task-icon {
   height: 25%;
 }
+
+.hidden {
+  visibility: hidden;
+}
