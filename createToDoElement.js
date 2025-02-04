@@ -32,13 +32,18 @@ export default function createToDoElement({ text, dueDate }) {
     Object.values(elements).forEach((ele) => {
       listItem.appendChild(ele);
     });
-    const editItemBtn = document.createElement("button");
+    const editItemBtn = document.createElement("i");
     editItemBtn.classList.add("edit-item-btn");
-    editItemBtn.textContent = "Edit";
+    editItemBtn.classList.add("fa-solid");
+    editItemBtn.classList.add("fa-pen-to-square");
+    // editItemBtn.textContent = "Edit";
     listItem.appendChild(editItemBtn);
-    const deleteTaskBtn = document.createElement("button");
+    const deleteTaskBtn = document.createElement("i");
     deleteTaskBtn.classList.add("delete-task-btn");
-    deleteTaskBtn.textContent = "Delete";
+    deleteTaskBtn.classList.add("fa-solid");
+    deleteTaskBtn.classList.add("fa-trash-can");
+
+    // deleteTaskBtn.textContent = "Delete";
     listItem.appendChild(deleteTaskBtn);
     toDoList.appendChild(listItem);
     return {

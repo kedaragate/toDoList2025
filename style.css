@@ -199,8 +199,16 @@ input {
 }
 .sort-task-icon {
   height: 25%;
+  cursor: pointer;
+  transition: display var(--trasition-duration) ease-in;
 }
-
 .hidden {
   visibility: hidden;
+}
+
+.delete-task-btn {
+  cursor: pointer;
+}
+.edit-item-btn {
+  cursor: pointer;
 }
