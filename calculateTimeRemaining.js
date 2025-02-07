@@ -14,6 +14,6 @@ export default function calculateTimeRemaining(dueDate) {
 
   const timeRemaining = `${timeDifferenceInDays} ${
     timeDifferenceInDays > 1 ? "Days" : "Day"
-  } and ${timeDifferenceInHours - timeDifferenceInDays * 24} Hours`;
+  } & ${timeDifferenceInHours - timeDifferenceInDays * 24} Hours`;
   return timeRemaining;
 }

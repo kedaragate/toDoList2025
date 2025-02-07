@@ -10,11 +10,11 @@ export default function themeToggler() {
       : document.documentElement.setAttribute("data-theme", "dark");
 
     if (isDarkTheme) {
-      themeTogglerElement.classList.add("fa-toggle-on");
-      themeTogglerElement.classList.remove("fa-toggle-off");
+      themeTogglerElement.classList.add("fa-moon");
+      themeTogglerElement.classList.remove("fa-sun");
     } else {
-      themeTogglerElement.classList.add("fa-toggle-off");
-      themeTogglerElement.classList.remove("fa-toggle-on");
+      themeTogglerElement.classList.add("fa-sun");
+      themeTogglerElement.classList.remove("fa-moon");
     }
   });
 }
