@@ -8,5 +8,13 @@ export default function themeToggler() {
     isDarkTheme
       ? document.documentElement.setAttribute("data-theme", "light")
       : document.documentElement.setAttribute("data-theme", "dark");
+
+    if (isDarkTheme) {
+      themeTogglerElement.classList.add("fa-toggle-on");
+      themeTogglerElement.classList.remove("fa-toggle-off");
+    } else {
+      themeTogglerElement.classList.add("fa-toggle-off");
+      themeTogglerElement.classList.remove("fa-toggle-on");
+    }
   });
 }

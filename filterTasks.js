@@ -1,15 +1,15 @@
-export default function filterTask() {
-  const searchEle = document.querySelector("#search-task-element");
-  searchEle.addEventListener("keyup", (e) => {
-    const toDoList = document.querySelectorAll(".list-item");
-    const toDoListArray = Array.from(toDoList);
+export default function filterTasks() {
+  const searchInput = document.querySelector("#search-task-element");
+  searchInput.addEventListener("keyup", (e) => {
+    const taskListItems = document.querySelectorAll(".list-item");
+    const taskListArray = Array.from(taskListItems);
     const searchText = e.target.value.toLowerCase();
-    const filteredList = toDoListArray.filter((item) => {
+    const filteredTasks = taskListArray.filter((item) => {
       const text = item.querySelector(".item-text").textContent.toLowerCase();
       return text.includes(searchText);
     });
-    toDoListArray.forEach((element) => {
-      element.style.display = filteredList.includes(element) ? "" : "none";
+    taskListArray.forEach((item) => {
+      item.style.display = filteredTasks.includes(item) ? "" : "none";
     });
   });
 }

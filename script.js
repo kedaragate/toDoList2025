@@ -1,34 +1,32 @@
 import createToDoElement from "./createToDoElement.js";
 import themeToggler from "./themeToggler.js";
-import editToDoEelement from "./editToDoElement.js";
+import editToDoElement from "./editToDoElement.js";
 import deleteTask from "./deleteTask.js";
 import filterTasks from "./filterTasks.js";
 import sortTasks from "./sortTasks.js";
-const dueDate = document.querySelector("#due-date");
+const dueDateInput = document.querySelector("#due-date");
 
 const today = new Date().toISOString().split("T")[0];
 
-dueDate.min = today;
+dueDateInput.min = today;
 
 themeToggler();
-editToDoEelement();
+editToDoElement();
 deleteTask();
 filterTasks();
 sortTasks();
-const toDoFormData = document.querySelector("#to-do-item-form");
-const toDoList = document.querySelector(".to-do-list");
-// const container = document.querySelector(".container");
+const toDoForm = document.querySelector("#to-do-item-form");
+const toDoListContainer = document.querySelector(".to-do-list");
 
-const toDoItemElement = document.querySelector("#to-do-item");
+const toDoItemInput = document.querySelector("#to-do-item");
 
-const storedList = JSON.parse(localStorage.getItem("stored-list")) || [];
-storedList.map((item) => {
-  createToDoElement(item);
+const storedTasks = JSON.parse(localStorage.getItem("stored-list")) || [];
+storedTasks.map((task) => {
+  createToDoElement(task);
 });
 
-toDoFormData.addEventListener("submit", (e) => {
+toDoForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  // console.log(e.target);
 
   const formData = new FormData(e.target);
   const formDataObj = Object.fromEntries(formData);
@@ -37,31 +35,30 @@ toDoFormData.addEventListener("submit", (e) => {
   }
 
   console.log(formDataObj["to-do-item"]);
-  const toDoData = {
+  const newTask = {
     text: formDataObj["to-do-item"].trim(),
     dueDate: formDataObj["due-date"],
   };
 
-  const arrayOfExistingItemsTexts = Array.from(toDoList.children).map(
+  const existingTaskTexts = Array.from(toDoListContainer.children).map(
     (item) => {
       return item.children[0].textContent.trim();
     }
   );
-  console.log(arrayOfExistingItemsTexts);
-  const checkForDuplicate = arrayOfExistingItemsTexts.filter((item) => {
-    return item === toDoItemElement.value.trim();
+  console.log(existingTaskTexts);
+  const duplicateTasks = existingTaskTexts.filter((item) => {
+    return item === toDoItemInput.value.trim();
   });
 
-  const isDuplicate = checkForDuplicate.length === 0 ? false : true;
+  const isDuplicate = duplicateTasks.length !== 0;
 
   if (!isDuplicate) {
-    const newToDoElement = createToDoElement(toDoData);
+    const newToDoElement = createToDoElement(newTask);
 
-    storedList.push(newToDoElement);
+    storedTasks.push(newToDoElement);
 
-    localStorage.setItem("stored-list", JSON.stringify(storedList));
+    localStorage.setItem("stored-list", JSON.stringify(storedTasks));
   } else {
-    alert(`Task "${toDoItemElement.value}" already exists`);
+    alert(`Task "${toDoItemInput.value}" already exists`);
   }
-  // console.log(listItemsArray);
 });

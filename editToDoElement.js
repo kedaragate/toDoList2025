@@ -1,20 +1,21 @@
 import createEditForm from "./createEditForm.js";
 import updateTask from "./updateTask.js";
-const toDoList = document.querySelector(".to-do-list");
+const toDoListContainer = document.querySelector(".to-do-list");
 
 export default function editToDoElement() {
-  toDoList.addEventListener("click", (e) => {
+  toDoListContainer.addEventListener("click", (e) => {
     if (!e.target.classList.contains("edit-item-btn")) {
       return;
     }
-    const storedList = JSON.parse(localStorage.getItem("stored-list"));
-    const itemTobeEdited = storedList.find((item) => {
-      return item.id === e.target.parentElement.id;
+    const storedTasks = JSON.parse(localStorage.getItem("stored-list"));
+    const taskToBeEdited = storedTasks.find((task) => {
+      console.log(task.id, e.target.parentElement.id);
+      return task.id === e.target.parentElement.id;
     });
-    console.log(itemTobeEdited);
-    const text = itemTobeEdited.text;
-    const date = itemTobeEdited.dueDate;
+    console.log(taskToBeEdited);
+    const text = taskToBeEdited.text;
+    const date = taskToBeEdited.dueDate;
     createEditForm(text, date);
-    updateTask(itemTobeEdited);
+    updateTask(taskToBeEdited);
   });
 }

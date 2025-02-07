@@ -3,16 +3,15 @@ export default function deleteTask() {
     if (!e.target.classList.contains("delete-task-btn")) {
       return;
     }
-    const storedList = JSON.parse(localStorage.getItem("stored-list"));
+    const storedTasks = JSON.parse(localStorage.getItem("stored-list"));
 
-    const itemTobeDeleted = storedList.findIndex((item) => {
-      return item.id === e.target.parentElement.id;
+    const taskIndex = storedTasks.findIndex((task) => {
+      return task.id === e.target.parentElement.id;
     });
-    if (itemTobeDeleted !== -1) {
-      storedList.splice(itemTobeDeleted, 1);
+    if (taskIndex !== -1) {
+      storedTasks.splice(taskIndex, 1);
       e.target.parentElement.remove();
-      localStorage.setItem("stored-list", JSON.stringify(storedList));
+      localStorage.setItem("stored-list", JSON.stringify(storedTasks));
     }
-    // createEditForm(text, date);
   });
 }

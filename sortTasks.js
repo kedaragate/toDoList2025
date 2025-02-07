@@ -1,25 +1,23 @@
 export default function sortTasks() {
-  const sortIconforTaskName = document.querySelector(
+  const sortIconForTaskName = document.querySelector(
     ".sort-task-icon-for-task-name"
   );
-  // console.log(sortIconforTaskName);
-  const sortIconforDueDate = document.querySelector(
+  const sortIconForDueDate = document.querySelector(
     ".sort-task-icon-for-due-date"
   );
-  const sortEle = document.querySelectorAll(".sort-task-icon");
-  sortEle.forEach((sortIcon) => {
+  const sortIcons = document.querySelectorAll(".sort-task-icon");
+  sortIcons.forEach((sortIcon) => {
     sortIcon.addEventListener("click", (e) => {
-      const toDolistContainer = document.querySelector(".to-do-list");
-      const toDoListHeadingsContainer = document.querySelector(
+      const taskListContainer = document.querySelector(".to-do-list");
+      const taskListHeadingsContainer = document.querySelector(
         ".task-list-headings-container"
       );
 
-      const toDoList = document.querySelectorAll(".list-item");
-      const toDoListArray = Array.from(toDoList);
+      const taskListItems = document.querySelectorAll(".list-item");
+      const taskListArray = Array.from(taskListItems);
 
-      // console.log(toDoList);
-      const isSorted = toDolistContainer.dataset.sorted === "true";
-      toDolistContainer.dataset.sorted = !isSorted;
+      const isSorted = taskListContainer.dataset.sorted === "true";
+      taskListContainer.dataset.sorted = !isSorted;
       if (isSorted) {
         e.target.classList.remove("fa-sort-up");
         e.target.classList.add("fa-sort-down");
@@ -28,32 +26,32 @@ export default function sortTasks() {
         e.target.classList.add("fa-sort-up");
       }
 
-      const sortedToDoList = toDoListArray.sort((a, b) => {
-        const text1 =
-          e.target === sortIconforTaskName
+      const sortedTaskList = taskListArray.sort((a, b) => {
+        const valueA =
+          e.target === sortIconForTaskName
             ? a.children[0].textContent.trim()
-            : e.target === sortIconforDueDate
+            : e.target === sortIconForDueDate
             ? Date.parse(a.children[1].textContent.trim())
             : null;
-        const text2 =
-          e.target === sortIconforTaskName
+        const valueB =
+          e.target === sortIconForTaskName
             ? b.children[0].textContent.trim()
-            : e.target === sortIconforDueDate
+            : e.target === sortIconForDueDate
             ? Date.parse(b.children[1].textContent.trim())
             : null;
 
         const comparison =
-          typeof (text1 && text2) === "string"
-            ? text1.localeCompare(text2)
-            : text1 - text2;
+          typeof (valueA && valueB) === "string"
+            ? valueA.localeCompare(valueB)
+            : valueA - valueB;
         return isSorted ? -comparison : comparison;
       });
 
-      toDoList.forEach((ele) => {
-        ele.remove();
+      taskListItems.forEach((item) => {
+        item.remove();
       });
 
-      sortedToDoList.forEach((item) => toDolistContainer.appendChild(item));
+      sortedTaskList.forEach((item) => taskListContainer.appendChild(item));
     });
   });
 }
