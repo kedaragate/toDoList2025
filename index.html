@@ -97,5 +97,26 @@
       src="https://kit.fontawesome.com/60ce62e26d.js"
       crossorigin="anonymous"
     ></script>
+    <script type="module">
+      import { GoogleGenerativeAI } from "https://cdn.skypack.dev/@google/generative-ai";
+
+      const genAI = new GoogleGenerativeAI(
+        "AIzaSyCs9G7vnTS5 - NC0Hpr8YS0kuAHwzmVjZo0"
+      );
+      const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+
+      async function generateText() {
+        const prompt = "Explain how AI works";
+        try {
+          const result = await model.generateContent(prompt);
+          const response = await result.response.text();
+          console.log(response);
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      }
+
+      generateText();
+    </script>
   </body>
 </html>

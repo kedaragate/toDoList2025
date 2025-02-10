@@ -2,6 +2,18 @@ import createSpanElement from "./createSpanElement.js";
 import calculateTimeRemaining from "./calculateTimeRemaining.js";
 const toDoListContainer = document.querySelector(".to-do-list");
 let counter = 1;
+/*************  ✨ Codeium Command ⭐  *************/
+/**
+ * Creates a to-do list item element and appends it to the to-do list container.
+ *
+ * @param {Object} task - An object containing task details.
+ * @param {string} task.text - The text of the to-do item.
+ * @param {string} task.dueDate - The due date of the to-do item in string format.
+ * @returns {Object|null} An object representing the created list item with its id, text, due date,
+ *                        time remaining, and class, or null if an error occurs.
+ */
+
+/******  863717da-1753-4d32-878a-6388fce2d715  *******/
 export default function createToDoElement({ text, dueDate }) {
   try {
     const listItem = document.createElement("li");

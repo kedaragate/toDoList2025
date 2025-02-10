@@ -1,3 +1,13 @@
+/**
+ * Updates a task in the local storage and the DOM with new values provided by the user.
+ *
+ * This function attaches an event listener to the edit form's submit event, retrieves the
+ * updated task information from the form fields, and updates the corresponding task in the
+ * local storage and the DOM if the task exists.
+ *
+ * @param {Object} taskToBeUpdated - The task object that needs to be updated, containing its unique identifier.
+ */
+
 export default function updateTask(taskToBeUpdated) {
   document.querySelector("#edit-form").addEventListener("submit", (e) => {
     const updatedFormData = new FormData(e.target);
