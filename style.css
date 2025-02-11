@@ -283,3 +283,22 @@ input {
     padding-bottom: 0.5rem;
   }
 }
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.grid > li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 25%;
+  height: 25%;
+  border: 1px solid red;
+  flex-grow: 2;
+}
+.display-none {
+  display: none !important;
+}
