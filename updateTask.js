@@ -8,22 +8,37 @@
  * @param {Object} taskToBeUpdated - The task object that needs to be updated, containing its unique identifier.
  */
 
+function getUpdatedTaskData(form) {
+  const updatedFormData = new FormData(form);
+  return Object.fromEntries(updatedFormData);
+}
+
+function findTaskIndex(storedTasks, taskId) {
+  return storedTasks.findIndex((task) => task.id === taskId);
+}
+
+function updateStoredTask(storedTasks, taskIndex, updatedTask) {
+  storedTasks[taskIndex].text = updatedTask["edited-text"];
+  storedTasks[taskIndex].dueDate = updatedTask["edited-date"];
+  localStorage.setItem("stored-list", JSON.stringify(storedTasks));
+}
+
+function updateDOMTask(taskId, updatedTask) {
+  const taskElement = document.querySelector(`#${taskId}`);
+  // Update the DOM element with new task data if needed
+  console.log(taskElement);
+}
+
 export default function updateTask(taskToBeUpdated) {
   document.querySelector("#edit-form").addEventListener("submit", (e) => {
-    const updatedFormData = new FormData(e.target);
-    const updatedTask = Object.fromEntries(updatedFormData);
-    console.log(updatedTask);
+    e.preventDefault();
+    const updatedTask = getUpdatedTaskData(e.target);
     const storedTasks = JSON.parse(localStorage.getItem("stored-list"));
-    const taskIndex = storedTasks.findIndex((task) => {
-      return task.id === taskToBeUpdated.id;
-    });
-    console.log(taskIndex);
+    const taskIndex = findTaskIndex(storedTasks, taskToBeUpdated.id);
+
     if (taskIndex !== -1) {
-      storedTasks[taskIndex].text = updatedTask["edited-text"];
-      storedTasks[taskIndex].dueDate = updatedTask["edited-date"];
-      localStorage.setItem("stored-list", JSON.stringify(storedTasks));
-      const taskElement = document.querySelector(`#${taskToBeUpdated.id}`);
-      console.log(taskElement);
+      updateStoredTask(storedTasks, taskIndex, updatedTask);
+      updateDOMTask(taskToBeUpdated.id, updatedTask);
     }
   });
 }
