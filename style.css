@@ -299,6 +299,10 @@ input {
   border: 1px solid red;
   flex-grow: 2;
 }
+.grid > li > span {
+  width: 100%;
+  text-align: center;
+}
 .display-none {
   display: none !important;
 }
