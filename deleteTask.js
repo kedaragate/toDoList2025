@@ -7,20 +7,27 @@
  */
 
 /******  78cdce68-60b4-49ba-8600-74eeb5c36d37  *******/
-export default function deleteTask() {
-  document.querySelector(".to-do-list").addEventListener("click", (e) => {
-    if (!e.target.classList.contains("delete-task-btn")) {
-      return;
-    }
-    const storedTasks = JSON.parse(localStorage.getItem("stored-list"));
 
-    const taskIndex = storedTasks.findIndex((task) => {
-      return task.id === e.target.parentElement.id;
-    });
-    if (taskIndex !== -1) {
-      storedTasks.splice(taskIndex, 1);
-      e.target.parentElement.remove();
-      localStorage.setItem("stored-list", JSON.stringify(storedTasks));
-    }
-  });
+function findTaskIndex(storedTasks, targetId) {
+  return storedTasks.findIndex((task) => task.id === targetId);
+}
+
+function handleDeleteClick(e) {
+  if (!e.target.classList.contains("delete-task-btn")) {
+    return;
+  }
+
+  const storedTasks = JSON.parse(localStorage.getItem("stored-list"));
+  const taskIndex = findTaskIndex(storedTasks, e.target.parentElement.id);
+
+  if (taskIndex !== -1) {
+    storedTasks.splice(taskIndex, 1);
+    e.target.parentElement.remove();
+    localStorage.setItem("stored-list", JSON.stringify(storedTasks));
+  }
+}
+
+export default function deleteTask() {
+  const toDoListContainer = document.querySelector(".to-do-list");
+  toDoListContainer.addEventListener("click", handleDeleteClick);
 }

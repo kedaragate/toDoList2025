@@ -4,28 +4,21 @@ import editToDoElement from "./editToDoElement.js";
 import deleteTask from "./deleteTask.js";
 import filterTasks from "./filterTasks.js";
 import sortTasks from "./sortTasks.js";
-const dueDateInput = document.querySelector("#due-date");
 
-const today = new Date().toISOString().split("T")[0];
+function initializeDueDateInput() {
+  const dueDateInput = document.querySelector("#due-date");
+  const today = new Date().toISOString().split("T")[0];
+  dueDateInput.min = today;
+}
 
-dueDateInput.min = today;
+function loadStoredTasks() {
+  const storedTasks = JSON.parse(localStorage.getItem("stored-list")) || [];
+  storedTasks.map((task) => {
+    createToDoElement(task);
+  });
+}
 
-themeToggler();
-editToDoElement();
-deleteTask();
-filterTasks();
-sortTasks();
-const toDoForm = document.querySelector("#to-do-item-form");
-const toDoListContainer = document.querySelector(".to-do-list");
-
-const toDoItemInput = document.querySelector("#to-do-item");
-
-const storedTasks = JSON.parse(localStorage.getItem("stored-list")) || [];
-storedTasks.map((task) => {
-  createToDoElement(task);
-});
-
-toDoForm.addEventListener("submit", (e) => {
+function handleFormSubmit(e) {
   e.preventDefault();
 
   const formData = new FormData(e.target);
@@ -34,31 +27,42 @@ toDoForm.addEventListener("submit", (e) => {
     return;
   }
 
-  console.log(formDataObj["to-do-item"]);
   const newTask = {
     text: formDataObj["to-do-item"].trim(),
     dueDate: formDataObj["due-date"],
   };
 
-  const existingTaskTexts = Array.from(toDoListContainer.children).map(
-    (item) => {
-      return item.children[0].textContent.trim();
-    }
+  const toDoListContainer = document.querySelector(".to-do-list");
+  const existingTaskTexts = Array.from(toDoListContainer.children).map((item) =>
+    item.children[0].textContent.trim()
   );
-  console.log(existingTaskTexts);
-  const duplicateTasks = existingTaskTexts.filter((item) => {
-    return item === toDoItemInput.value.trim();
-  });
 
-  const isDuplicate = duplicateTasks.length !== 0;
+  const isDuplicate = existingTaskTexts.includes(newTask.text);
 
   if (!isDuplicate) {
     const newToDoElement = createToDoElement(newTask);
-
+    const storedTasks = JSON.parse(localStorage.getItem("stored-list")) || [];
     storedTasks.push(newToDoElement);
-
     localStorage.setItem("stored-list", JSON.stringify(storedTasks));
   } else {
-    alert(`Task "${toDoItemInput.value}" already exists`);
+    alert(`Task "${newTask.text}" already exists`);
   }
-});
+}
+
+function initializeForm() {
+  const toDoForm = document.querySelector("#to-do-item-form");
+  toDoForm.addEventListener("submit", handleFormSubmit);
+}
+
+function initializeApp() {
+  initializeDueDateInput();
+  themeToggler();
+  editToDoElement();
+  deleteTask();
+  filterTasks();
+  sortTasks();
+  loadStoredTasks();
+  initializeForm();
+}
+
+initializeApp();
