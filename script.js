@@ -4,6 +4,7 @@ import editToDoElement from "./editToDoElement.js";
 import deleteTask from "./deleteTask.js";
 import filterTasks from "./filterTasks.js";
 import sortTasks from "./sortTasks.js";
+import listStyleToggler from "./listStyleToggler.js";
 
 function initializeDueDateInput() {
   const dueDateInput = document.querySelector("#due-date");
@@ -63,6 +64,7 @@ function initializeApp() {
   sortTasks();
   loadStoredTasks();
   initializeForm();
+  listStyleToggler();
 }
 
 initializeApp();
